@@ -11,3 +11,6 @@ yarn-error.log
 # Logs
 logs/*
 !logs/.gitkeep
+
+# Runtime data
+.vscode
