@@ -13,4 +13,4 @@ logs/*
 !logs/.gitkeep
 
 # Runtime data
-.vscode
+.vscode/*
