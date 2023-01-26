@@ -1,8 +1,11 @@
 import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
+import httpStatus from 'http-status';
 import config from './config/config';
+import error from './middlewares/error';
 import rateLimiter from './middlewares/rateLimiter';
-import router from './routes';
+import router from './routes/v1';
+import ApiError from './utils/ApiError';
 
 const app = express();
 
@@ -17,20 +20,20 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
-// Routes
-app.use('/', router);
+config.env === 'production' && app.use('/v1/auth', rateLimiter);
 
-// Rate limiter
-config.env === 'production' && app.use('/api', rateLimiter);
+// v1 api routes
+app.use('/v1', router);
 
-// Health check
-app.get('/', (req: Request, res: Response) => {
-    res.status(200).send('API is online ✅');
+app.get('/status', (req: Request, res: Response) => {
+    res.status(200).send('OK');
 });
 
-// 404
-app.use('*', (req: Request, res: Response) => {
-    res.status(404).send('Route not found ❌');
+app.use((req: Request, res: Response, next: any) => {
+    next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
 });
+
+app.use(error.converter);
+app.use(error.handler);
 
 export default app;
