@@ -5,7 +5,7 @@ dotenv.config({
     path: path.join(__dirname, `../../.env.${process.env.NODE_ENV}`),
 });
 
-const env = {
+const config = {
     env: process.env.NODE_ENV || 'development',
     app: {
         name: process.env.APP_NAME || 'API',
@@ -36,4 +36,4 @@ const env = {
     }
 };
 
-export default env;
+export default config;

@@ -1,5 +1,5 @@
 import app from './app';
-import env from './config/config';
+import config from './config/config';
 import logger from './config/logger';
 
 const exitHandler = () => {
@@ -15,10 +15,10 @@ const unexpectedErrorHandler = (error: Error) => {
     exitHandler();
 };
 
+const exitSignals: NodeJS.Signals[] = ['SIGINT', 'SIGTERM', 'SIGQUIT'];
+
 process.on('uncaughtException', unexpectedErrorHandler);
 process.on('unhandledRejection', unexpectedErrorHandler);
-
-const exitSignals: NodeJS.Signals[] = ['SIGINT', 'SIGTERM', 'SIGQUIT'];
 
 exitSignals.map((sig) =>
     process.on(sig, () => {
@@ -27,6 +27,6 @@ exitSignals.map((sig) =>
     })
 );
 
-const server = app.listen(env.app.port, () => {
-    logger.info(`Server is running on port ${env.app.port} in ${env.env} mode`);
+const server = app.listen(config.app.port, () => {
+    logger.info(`Server is running on port ${config.app.port} in ${config.env} mode`);
 });
