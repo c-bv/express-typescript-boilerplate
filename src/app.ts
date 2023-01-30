@@ -9,6 +9,7 @@ import ApiError from './utils/ApiError';
 
 const app = express();
 
+app.use(express.static('public'));
 app.use(express.json());
 app.use(cors());
 app.use((req: Request, res: Response, next: NextFunction) => {
