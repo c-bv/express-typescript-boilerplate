@@ -1,6 +1,6 @@
 import app from './app';
-import config from './config/config';
-import logger from './config/logger';
+import config from '@config/config';
+import logger from '@config/logger';
 
 const exitHandler = () => {
     if (!server) return process.exit(1);

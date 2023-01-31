@@ -1,21 +1,26 @@
 import express from 'express';
-import config from '../../config/config';
+import config from '@config/config';
 import authRoute from './auth.route';
 import docsRoute from './docs.route';
+import userRoute from './user.route';
 
 const router = express.Router();
 
 const defaultRoutes = [
     {
         path: '/auth',
-        route: authRoute,
+        route: authRoute
     },
+    {
+        path: '/users',
+        route: userRoute
+    }
 ];
 
 const devRoutes = [
     {
         path: '/docs',
-        route: docsRoute,
+        route: docsRoute
     },
 ];
 

@@ -1,5 +1,5 @@
 import express from 'express';
-import asyncRouter from '../../utils/asyncRouter';
+import asyncRouter from '@utils/asyncRouter';
 
 const router = asyncRouter(express.Router());
 

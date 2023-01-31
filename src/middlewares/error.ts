@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
-import env from '../config/config';
-import ApiError from '../utils/ApiError';
+import env from '@config/config';
+import ApiError from '@utils/ApiError';
 
 const converter = (err: any, req: Request, res: Response, next: NextFunction) => {
     let error = err;
