@@ -27,7 +27,7 @@ config.env !== 'production' && logger.add(new winston.transports.Console({
     format: winston.format.combine(
         enumerateErrorFormat(),
         winston.format.colorize(),
-        winston.format.printf((info: any) => `🔎 ${info.level}: ${info.message}`)
+        winston.format.printf((info: any) => `${info.level}: ${info.message}`)
     )
 }));
 
