@@ -10,6 +10,11 @@ const createUser = async (userData: IUser) => {
     return UserSchema.create(userData);
 };
 
+const getUserByEmail = async (email: string): Promise<IUser | null> => {
+    return UserSchema.findOne({ email });
+};
+
 export default {
     createUser,
+    getUserByEmail,
 };

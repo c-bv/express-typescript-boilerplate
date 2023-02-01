@@ -10,12 +10,12 @@ interface IUser {
     role: IRole;
 };
 
-interface IUserDocument extends IUser, Document {
+export interface IUserDocument extends IUser, Document {
     setPassword: (password: string) => Promise<void>;
     checkPassword: (password: string) => Promise<boolean>;
 };
 
-interface IUserModel extends Model<IUserDocument> {
+export interface IUserModel extends Model<IUserDocument> {
     isEmailTaken(email: string): Promise<boolean>;
 };
 

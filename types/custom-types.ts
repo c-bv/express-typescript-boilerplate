@@ -8,5 +8,5 @@ export type IUser = {
     lastName?: string;
     email?: string;
     role?: IRole;
-    password?: string
+    password?: string;
 }
