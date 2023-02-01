@@ -1,4 +1,4 @@
-import authController from '@/controllers/auth.controller';
+import { authController } from '@/controllers';
 import asyncRouter from '@/utils/asyncRouter';
 import express from 'express';
 
