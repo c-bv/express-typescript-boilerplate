@@ -1,4 +1,4 @@
-import ApiError from '@/utils/ApiError';
+import ApiError from '@utils/ApiError';
 import { IUser } from '@custom-types/custom-types';
 import { UserSchema } from '@models';
 import httpStatus from 'http-status';

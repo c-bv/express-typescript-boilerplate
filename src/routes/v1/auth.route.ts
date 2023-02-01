@@ -1,5 +1,5 @@
-import { authController } from '@/controllers';
-import asyncRouter from '@/utils/asyncRouter';
+import { authController } from '@controllers';
+import asyncRouter from '@utils/asyncRouter';
 import express from 'express';
 
 const router = asyncRouter(express.Router());
