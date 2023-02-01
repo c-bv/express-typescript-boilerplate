@@ -45,26 +45,25 @@ const UserSchema: Schema<IUserDocument> = new Schema({
 /*
     use regular function instead of arrow function because arrow function does not bind 'this'
 */
-UserSchema.methods.setPassword = async function (password: string) {
+UserSchema.methods.setPassword = async function (password: string): Promise<void> {
     const salt: string = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
     this.password = hash;
 };
 
-UserSchema.methods.checkPassword = async function (password: string) {
+UserSchema.methods.checkPassword = async function (password: string): Promise<boolean> {
     const result = await bcrypt.compare(password, this.hashedPassword);
     return result;
 };
 
-UserSchema.statics.isEmailTaken = async function (email: string) {
+UserSchema.statics.isEmailTaken = async function (email: string): Promise<boolean> {
     const user = await this.findOne({ email });
     return !!user;
 };
 
-UserSchema.pre('save', async function () {
+UserSchema.pre('save', async function (): Promise<void> {
     if (!this.isModified('password')) return;
     await this.setPassword(this.password);
-    console.log('🚩', this);
 });
 
 const User = mongoose.model<IUserDocument, IUserModel>('User', UserSchema);
