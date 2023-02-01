@@ -1,10 +1,11 @@
-import { userService } from '@services'
+import { userService, tokenService } from '@services'
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 
 const register = async (req: Request, res: Response) => {
     const user = await userService.createUser(req.body);
-    res.status(httpStatus.CREATED).send(user);
+    const token = tokenService.generateAuthToken(user);
+    res.status(httpStatus.CREATED).send({ user, token });
 };
 
 const login = async (req: Request, res: Response) => {
