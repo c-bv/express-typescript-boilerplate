@@ -1,3 +1,4 @@
+import { IUserDocument } from '@/models/user.model';
 import { IUser } from '@custom-types/custom-types';
 import { UserSchema } from '@models';
 import ApiError from '@utils/ApiError';
@@ -18,8 +19,21 @@ const queryUsers = async (filter: object, options: object): Promise<IUser[]> => 
     return await UserSchema.find(filter, null, options);
 };
 
-const getUserById = async (id: string): Promise<IUser | null> => {
+const getUserById = async (id: string): Promise<IUserDocument | null> => {
     return await UserSchema.findById(id);
+};
+
+const updateUserById = async (userId: string, updateBody: IUser): Promise<IUserDocument | null> => {
+    const user = await getUserById(userId);
+    if (!user) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+    }
+    if (updateBody.email && (await UserSchema.isEmailTaken(updateBody.email))) {
+        throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+    }
+    Object.assign(user, updateBody);
+    await user.save();
+    return user;
 };
 
 export default {
@@ -27,4 +41,5 @@ export default {
     getUserById,
     getUserByEmail,
     queryUsers,
+    updateUserById,
 };

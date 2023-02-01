@@ -23,8 +23,14 @@ const getUser = async (req: IRequest, res: Response) => {
     res.send(user);
 };
 
+const updateUser = async (req: IRequest, res: Response) => {
+    const user = await userService.updateUserById(req.params.userId, req.body); 
+    res.send(user);
+};
+
 export default {
     createUser,
     getUsers,
     getUser,
+    updateUser,
 };
