@@ -36,10 +36,20 @@ const updateUserById = async (userId: string, updateBody: IUser): Promise<IUserD
     return user;
 };
 
+const deleteUserById = async (userId: string): Promise<void> => {
+    const user = await getUserById(userId);
+    if (!user) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+    }
+    await user.remove();
+    return;
+};
+
 export default {
     createUser,
     getUserById,
     getUserByEmail,
     queryUsers,
     updateUserById,
+    deleteUserById
 };

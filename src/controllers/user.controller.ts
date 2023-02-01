@@ -24,8 +24,13 @@ const getUser = async (req: IRequest, res: Response) => {
 };
 
 const updateUser = async (req: IRequest, res: Response) => {
-    const user = await userService.updateUserById(req.params.userId, req.body); 
+    const user = await userService.updateUserById(req.params.userId, req.body);
     res.send(user);
+};
+
+const deleteUser = async (req: IRequest, res: Response) => {
+    await userService.deleteUserById(req.params.userId);
+    res.status(httpStatus.NO_CONTENT).send();
 };
 
 export default {
@@ -33,4 +38,5 @@ export default {
     getUsers,
     getUser,
     updateUser,
+    deleteUser
 };
