@@ -1,17 +1,15 @@
-import { User } from '@custom-types/custom-types';
+import ApiError from '@/utils/ApiError';
+import { IUser } from '@custom-types/custom-types';
+import { UserSchema } from '@models';
+import httpStatus from 'http-status';
 
-const createUser = async (userData: User) => {
-
+const createUser = async (userData: IUser) => {
+    if (await UserSchema.isEmailTaken(userData.email as string)) {
+        throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+    }
+    return UserSchema.create(userData);
 };
-//   check if user already exists
 
-//   hash password
-
-//   create user
-
-//   generate auth token
-
-//   return user and token to controller
 export default {
     createUser,
 };
