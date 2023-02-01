@@ -18,18 +18,18 @@ const getUsers = async (req: Request, res: Response) => {
 };
 
 const getUser = async (req: IRequest, res: Response) => {
-    const user = await userService.getUserById(req.params.userId);
+    const user = await userService.getUserById(req.params.id);
     if (!user) throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
     res.send(user);
 };
 
 const updateUser = async (req: IRequest, res: Response) => {
-    const user = await userService.updateUserById(req.params.userId, req.body);
+    const user = await userService.updateUserById(req.params.id, req.body);
     res.send(user);
 };
 
 const deleteUser = async (req: IRequest, res: Response) => {
-    await userService.deleteUserById(req.params.userId);
+    await userService.deleteUserById(req.params.id);
     res.status(httpStatus.NO_CONTENT).send();
 };
 

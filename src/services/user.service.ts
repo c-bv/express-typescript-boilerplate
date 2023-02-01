@@ -23,8 +23,8 @@ const getUserById = async (id: string): Promise<IUserDocument | null> => {
     return await UserSchema.findById(id);
 };
 
-const updateUserById = async (userId: string, updateBody: IUser): Promise<IUserDocument | null> => {
-    const user = await getUserById(userId);
+const updateUserById = async (id: string, updateBody: IUser): Promise<IUserDocument | null> => {
+    const user = await getUserById(id);
     if (!user) {
         throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
     }
@@ -36,8 +36,8 @@ const updateUserById = async (userId: string, updateBody: IUser): Promise<IUserD
     return user;
 };
 
-const deleteUserById = async (userId: string): Promise<void> => {
-    const user = await getUserById(userId);
+const deleteUserById = async (id: string): Promise<void> => {
+    const user = await getUserById(id);
     if (!user) {
         throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
     }
