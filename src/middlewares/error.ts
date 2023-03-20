@@ -22,6 +22,6 @@ const handler = (err: any, req: Request, res: Response, next: NextFunction) => {
         ...(env.env === 'development' && { stack: err.stack })
     };
     res.status(err.status).send(response);
-}
+};
 
 export default { converter, handler };

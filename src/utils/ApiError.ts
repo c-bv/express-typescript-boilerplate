@@ -4,7 +4,7 @@ class ApiError extends Error {
         super(message);
         this.status = status;
         stack ? this.stack = stack : Error.captureStackTrace(this, this.constructor);
-    }
-}
+    };
+};
 
 export default ApiError;

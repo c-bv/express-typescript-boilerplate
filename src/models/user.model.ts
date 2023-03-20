@@ -42,9 +42,6 @@ const UserSchema: Schema<IUserDocument> = new Schema({
     role: { type: String, enum: [] as IRole[], default: 'user' }
 });
 
-/*
-    use regular function instead of arrow function because arrow function does not bind 'this'
-*/
 UserSchema.methods.setPassword = async function (password: string): Promise<void> {
     const salt: string = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);

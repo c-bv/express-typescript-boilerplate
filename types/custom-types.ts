@@ -3,10 +3,14 @@ declare const roles: readonly ['admin', 'user'];
 export type IRole = typeof roles[number];
 
 export type IUser = {
-    id?: string;
+    id?: any;
     firstName?: string;
     lastName?: string;
     email?: string;
-    role?: IRole;
     password?: string;
-}
+    role?: IRole;
+};
+
+export interface IRequest extends Request {
+    user?: any;
+};
