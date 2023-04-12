@@ -54,8 +54,8 @@ UserSchema.methods.checkPassword = async function (password: string): Promise<bo
 };
 
 UserSchema.statics.isEmailTaken = async function (email: string): Promise<boolean> {
-    const user = await this.findOne({ email });
-    return !!user;
+    // const user = await this.findOne({ email });
+    return false;
 };
 
 UserSchema.pre('save', async function (): Promise<void> {

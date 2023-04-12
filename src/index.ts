@@ -1,6 +1,7 @@
 import app from './app';
-import config from '@config/config';
+import config from '@/config/config';
 import logger from '@config/logger';
+import connectDB from '@config/db';
 
 const exitHandler = () => {
     if (!server) return process.exit(1);
@@ -29,4 +30,5 @@ exitSignals.map((sig) =>
 
 const server = app.listen(config.app.port, () => {
     logger.info(`Server is running on port ${config.app.port} in ${config.env} mode`);
+    connectDB();
 });

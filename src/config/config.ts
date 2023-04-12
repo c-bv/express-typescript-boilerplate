@@ -1,38 +1,65 @@
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 
+interface IConfig {
+    env: string;
+    app: {
+        name: string;
+        port: string;
+    };
+    db: {
+        uri: string;
+        config: {
+            useNewUrlParser: boolean;
+            useUnifiedTopology: boolean;
+        };
+    };
+    jwt: {
+        secret: string;
+        expiresIn: string;
+    };
+    rateLimit: {
+        windowMs: number;
+        max: number;
+    };
+    mail: {
+        host: string;
+        port: string;
+        user: string;
+        pass: string;
+    };
+};
+
 dotenv.config({
     path: path.join(__dirname, `../../.env.${process.env.NODE_ENV}`),
 });
 
-const config = {
-    env: process.env.NODE_ENV || 'development',
+const config: IConfig = {
+    env: process.env.NODE_ENV!,
     app: {
-        name: process.env.APP_NAME || 'API',
-        port: process.env.PORT || 5000,
-        url: process.env.APP_URL || `http://localhost:${process.env.PORT}`
+        name: process.env.APP_NAME!,
+        port: process.env.PORT!
     },
-    database: {
-        host: process.env.DB_HOST || 'localhost',
-        port: process.env.DB_PORT || 27017,
-        name: process.env.DB_NAME || 'api',
-        user: process.env.DB_USER || '',
-        pass: process.env.DB_PASS || '',
-        uri: process.env.DB_URI || ''
+    db: {
+        uri: process.env.DB_URI!,
+        config: {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        }
     },
     jwt: {
-        secret: process.env.JWT_SECRET,
-        expiresIn: process.env.JWT_EXPIRES_IN || '1d',
+        secret: process.env.JWT_SECRET!,
+        expiresIn: process.env.JWT_EXPIRES_IN!,
     },
     rateLimit: {
-        windowMs: Number(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000, // 15 minutes
-        max: Number(process.env.RATE_LIMIT_MAX) || 100, // limit each IP to 100 requests per windowMs
+        windowMs: Number(process.env.RATE_LIMIT_WINDOW_MS),
+        max: Number(process.env.RATE_LIMIT_MAX)
     },
     mail: {
-        host: process.env.MAIL_HOST,
-        port: process.env.MAIL_PORT,
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS
+        host: process.env.MAIL_HOST!,
+        port: process.env.MAIL_PORT!,
+        user: process.env.MAIL_USER!,
+        pass: process.env.MAIL_PASS!
     }
 };
 

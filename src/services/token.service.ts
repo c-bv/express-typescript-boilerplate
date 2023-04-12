@@ -1,4 +1,4 @@
-import config from '@config/config';
+import config from '@/config/config';
 import { IUser } from '@custom-types/custom-types';
 import ApiError from '@utils/ApiError';
 import { NextFunction, Request, Response } from 'express';

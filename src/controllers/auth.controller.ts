@@ -5,6 +5,7 @@ import httpStatus from 'http-status';
 const register = async (req: Request, res: Response) => {
     const user = await userService.createUser(req.body);
     const token = tokenService.generateAuthToken(user);
+    console.log('🚩', { user, token });
     res.status(httpStatus.CREATED).send({ user, token });
 };
 

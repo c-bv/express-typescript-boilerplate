@@ -1,4 +1,4 @@
-import config from '@config/config';
+import config from '@/config/config';
 import error from '@middlewares/error';
 import rateLimiter from '@middlewares/rateLimiter';
 import router from '@routes/v1';

@@ -8,7 +8,11 @@ const createUser = async (userData: IUser) => {
     if (await User.isEmailTaken(userData.email as string)) {
         throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
     }
-    return User.create(userData);
+    console.log('🚩', 'ok');
+    const data = await User.create(userData);
+    console.log('🚩', data);
+    return data;
+    // return User.create(userData);
 };
 
 const getUserByEmail = async (email: string): Promise<IUser | null> => {
